@@ -12,7 +12,6 @@ import MidiStatus from "./components/MidiStatus";
 import PianoViewer from "./components/PianoViewer";
 import ToggleButton from "./components/ToggleButton";
 import useEventListener from "./useEventListener";
-import { act } from "react-dom/test-utils";
 
 const SHAPES = ["", "-", "aug", "dim", "⁷", "maj⁷", "-⁷", "ø⁷", "o⁷"];
 const MIDI = 0;
@@ -44,7 +43,7 @@ function App() {
   const [shape, setShape] = useState(randomElementFrom(SHAPES));
   const [note, setNote] = useState(randomElementFrom(NOTES));
   const [modifier, setModifier] = useState(randomElementFrom(MODIFIERS));
-  const [intervalTime, setIntervalTime] = useState(1000);
+  const [intervalTime, setIntervalTime] = useState(2000);
   const [midiDeviceIndex, setMidiDeviceIndex] = useState(0);
   const [activeMIDINotes, setActiveMIDINotes] = useState([]);
   const [midiInput, setMidiInput] = useState(0);
@@ -66,10 +65,8 @@ function App() {
     if (WebMidi.inputs.length < 1) {
       if (firstTimeSetup) setMode(1);
       setFirstTimeSetup(false);
-      console.log("no midi devices");
       setMidiInput(0);
     } else {
-      console.log("Setting midi input");
       setMidiInput(WebMidi.inputs[midiDeviceIndex]);
     }
     setAndWaitLoadingDevicesFalse();
@@ -78,47 +75,19 @@ function App() {
   // TODO understand useCallback
   const handleNotePlayed = useCallback((e) => {
     const note = e.note.name + (e.note.accidental || "");
-    console.log("Trying to add", note);
     if (!activeMIDINotes.includes(note)) {
-      console.log("Adding", note);
-      console.log("ActiveMIDINotes before", activeMIDINotes);
-      // setActiveMIDINotes([...activeMIDINotes, note]);
       setActiveMIDINotes((prevMidiNotes) => [...prevMidiNotes, note]);
     }
   });
 
-  useEffect(() => {
-    console.log("___ActiveMIDINotes", activeMIDINotes);
-  });
-
   const handleNoteUnplayed = useCallback((e) => {
     const note = e.note.name + (e.note.accidental || "");
-    console.log("Trying to remove", note);
     if (activeMIDINotes.includes(note)) {
-      console.log("Removing", note);
-      const newNotes = activeMIDINotes.filter((n) => n !== note);
-      // setActiveMIDINotes(newNotes);
       setActiveMIDINotes((prevMidiNotes) =>
         prevMidiNotes.filter((n) => n !== note)
       );
     }
   });
-
-  // function addMidiListeners() {
-  //   if (midiInput) {
-  //     console.log("Adding listener");
-  //     midiInput.addListener("noteon", handleNotePlayed);
-  //     midiInput.addListener("noteoff", handleNoteUnplayed);
-  //   }
-  // }
-
-  // function removeMidiListeners() {
-  //   if (midiInput) {
-  //     console.log("Removing listener");
-  //     midiInput.removeListener("noteon", handleNotePlayed);
-  //     midiInput.removeListener("noteoff", handleNoteUnplayed);
-  //   }
-  // }
 
   useEventListener("noteon", handleNotePlayed, midiInput);
   useEventListener("noteoff", handleNoteUnplayed, midiInput);
@@ -156,7 +125,6 @@ function App() {
   }, [intervalTime, mode, currentTypes]);
 
   useEffect(() => {
-    // console.log(activeMIDINotes);
     if (
       chordBeingPlayed(
         note,
