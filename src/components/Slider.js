@@ -5,7 +5,7 @@ function Slider({ currentInterval, onChangeSpeed }) {
         htmlFor="default-range"
         className="inline text-sm font-medium text-gray-600 dark:text-white"
       >
-        Speed - {currentInterval / 1000}
+        Speed
       </label>
       <input
         id="default-range"
