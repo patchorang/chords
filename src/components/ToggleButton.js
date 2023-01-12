@@ -1,6 +1,6 @@
 function ToggleButton({ items, selectedIndex, handleClick, className }) {
   const selectedClassNames =
-    "ml-1 text-white text-sm font-bold bg-blue-500 p-2 rounded hover:bg-blue-600";
+    "ml-1 text-white text-sm font-bold bg-blue-500 py-2 px-4 rounded hover:bg-blue-600";
 
   const unselectedClassNames =
     "bg-slate-200 hover:bg-slate-300 text-sm text-gray-700 font-bold py-2 px-4 rounded ";
