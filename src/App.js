@@ -236,7 +236,7 @@ function App() {
     <div className="container m-auto grid max-w-2xl w-full">
       <div className="bg-slate-50 p-8 my-4 rounded-md">
         <div className="container w-full pb-2">
-          <div className="flex justify-between mb-2">
+          <div className="flex justify-between mb-2 items-center">
             <span className="text-5xl">
               {note}
               {modifier} {shape}
