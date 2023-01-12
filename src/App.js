@@ -237,7 +237,7 @@ function App() {
       <div className="bg-slate-50 p-8 my-4 rounded-md">
         <div className="container w-full pb-2">
           <div className="flex justify-between mb-2 items-center">
-            <span className="text-5xl">
+            <span className="text-5xl font-bold">
               {note}
               {modifier} {shape}
             </span>
