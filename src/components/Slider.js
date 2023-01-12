@@ -1,11 +1,11 @@
 function Slider({ currentInterval, onChangeSpeed }) {
   return (
-    <div>
+    <div className="flex space-x-4 items-center pt-1">
       <label
         htmlFor="default-range"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        className="inline text-sm font-medium text-gray-600 dark:text-white"
       >
-        Speed
+        Speed - {currentInterval / 1000}
       </label>
       <input
         id="default-range"
@@ -14,7 +14,7 @@ function Slider({ currentInterval, onChangeSpeed }) {
         max="10000"
         value={currentInterval}
         onChange={onChangeSpeed}
-        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+        className="inline w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
       />
     </div>
   );
