@@ -276,6 +276,18 @@ function App() {
           </div>
         </div>
       </div>
+      <button
+        type="button"
+        className="ml-1 text-white text-sm font-bold bg-neutral-800 py-2 px-4 rounded hover:bg-neutral-900"
+        onClick={() =>
+          window.open(
+            "https://remotepianoteachers.glide.page/dl/d0a5f4",
+            "_blank"
+          )
+        }
+      >
+        Find a remote piano teacher
+      </button>
     </div>
   );
 }
